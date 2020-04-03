@@ -7,3 +7,4 @@ app/static
 app/error.log
 .vscode
 env/
+.pytest_cache
