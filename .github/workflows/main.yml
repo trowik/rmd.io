@@ -1,4 +1,4 @@
-name: Check Black Formatting
+name: Run Checks
 
 on:
   push:
@@ -7,7 +7,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    - uses: jpetrucciani/black-check@19.10b0
+    - name: Build docker-compose
+      run: docker-compose up -d
+    - name: Check container status
+      run: docker-compose ps
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Check black formatting
+      uses: jpetrucciani/black-check@19.10b0
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 app/ --count --ignore=E231,E402,E501,E722,W503 --max-complexity=18 --show-source --statistics
+    - name: Test with pytest
+      run: |
+        pip install pytest pytest-django
+        sudo chown $USER app/error.log
+        docker-compose exec -T rmd pytest app/ -v
