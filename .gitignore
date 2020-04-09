@@ -8,3 +8,5 @@ app/error.log
 .vscode
 env/
 .pytest_cache
+.coverage
+.flake8
