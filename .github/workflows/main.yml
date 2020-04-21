@@ -19,6 +19,7 @@ jobs:
       uses: jpetrucciani/black-check@19.10b0
     - name: Lint with flake8
       run: |
+<<<<<<< HEAD
         docker-compose exec -T rmd flake8 app/ --count --ignore=E231,E402,E501,E722,W503 --max-complexity=18 --show-source --statistics
   test:
     runs-on: ubuntu-latest
@@ -30,6 +31,10 @@ jobs:
         docker-compose up -d
     - name: Check container status
       run: docker-compose ps
+=======
+        pip install flake8
+        flake8 app/ --count --ignore=E231,E402,E501,E722,W503 --max-complexity=10 --show-source --statistics
+>>>>>>> 9fc505ba911a328c371686ba576020a52c78d500
     - name: Test with pytest
       run: |
         docker-compose exec -T rmd pytest app/ -v
