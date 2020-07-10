@@ -103,7 +103,7 @@ DATABASES = {
         "NAME": env.str("DATABASE_NAME", default="maildelay"),
         "USER": env.str("DATABASE_USER", default="rmdio"),
         "PASSWORD": env.str("DATABASE_PASSWORD", default="rmdio"),
-        "HOST": env.str("DATABASE_HOST", default="postgres"),
+        "HOST": env.str("DATABASE_HOST", default="10.0.72.195"),
         "PORT": env.str("DATABASE_PORT", default="5432"),
     }
 }
