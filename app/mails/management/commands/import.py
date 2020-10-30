@@ -43,6 +43,7 @@ class Command(BaseCommand):
         try:
             user = User.objects.get(email=sender, is_active=True)
             account = user.get_account()
+            keys.append(account.key)
         except:
             message.delete()
             logger.error("Mail from %s deleted: User not registered" % sender)
